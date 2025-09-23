@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      width: 400px;
+      height: 500px;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+    }
+    #comments-container {
+      overflow-y: auto;
+      height: 450px;
+    }
+    .comment {
+      border-bottom: 1px solid #ddd;
+      padding: 8px 0;
+    }
+    .author {
+      font-weight: bold;
+      color: #385898;
+    }
+    .timestamp {
+      font-size: 0.8em;
+      color: #777;
+    }
+    button {
+      background-color: #4267B2;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      margin: 5px 0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h3>Facebook Comments</h3>
+  <button id="scrape-btn">Scrape Comments</button>
+  <div id="comments-container"></div>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Social Media Comment Scraper",
+  "version": "1.0",
+  "description": "Scrape and view social media comments in popup",
+  "permissions": ["activeTab", "scripting", "tabs"],
+  "host_permissions": [
+    "https://*.youtube.com/*",
+    "https://*.x.com/*",
+    "https://*.instagram.com/*",
+    "https://*.facebook.com/*",
+    "http://localhost:5000/*",
+    "http://127.0.0.1:5000/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/*",
+        "https://*.x.com/*",
+        "https://*.instagram.com/*",
+        "https://*.facebook.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

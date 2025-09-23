@@ -1,0 +1,179 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    width: 300px;
+  }
+  
+  #comments {
+    margin-top: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .comment {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 5px;
+    padding: 5px;
+  }
+  
+  .comment strong {
+    color: #333;
+  }
+
+  /* Progress Bar Styles */
+  .analysis-progress {
+    text-align: center;
+    padding: 20px 10px;
+  }
+  
+  .analysis-progress h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #45a049);
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+  }
+  
+  #progressText {
+    margin: 10px 0;
+    font-size: 12px;
+    color: #666;
+  }
+  
+  /* Analysis Results Styles */
+  .analysis-results {
+    padding: 10px;
+  }
+  
+  .analysis-results h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .sentiment-section {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 4px solid;
+  }
+  
+  .sentiment-section.positive {
+    background-color: #f0f8f0;
+    border-left-color: #4CAF50;
+  }
+  
+  .sentiment-section.negative {
+    background-color: #fff0f0;
+    border-left-color: #f44336;
+  }
+  
+  .sentiment-section.neutral {
+    background-color: #f8f8f8;
+    border-left-color: #9e9e9e;
+  }
+  
+  .sentiment-section h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+  }
+  
+  .sentiment-section p {
+    margin: 5px 0;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  
+  /* Button Styles */
+  .action-buttons {
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .fetch-btn, .analyse-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin: 5px;
+  }
+  
+  .fetch-btn:hover, .analyse-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .fetch-btn:disabled, .analyse-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  /* Comment Summary Styles */
+  .comment-summary {
+    padding: 10px;
+  }
+  
+  .comment-summary h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+  }
+  
+  .comment-preview {
+    margin: 15px 0;
+  }
+  
+  .comment-preview h4 {
+    margin: 0 0 10px 0;
+    font-size: 13px;
+    color: #666;
+  }
+  
+  .comment-preview-item {
+    background-color: #f9f9f9;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 4px;
+    border-left: 3px solid #4CAF50;
+  }
+  
+  .comment-preview-item strong {
+    color: #333;
+    font-size: 12px;
+  }
+  
+  .comment-time, .comment-likes {
+    font-size: 10px;
+    color: #666;
+    margin-left: 10px;
+  }
+  
+  .comment-text {
+    margin: 5px 0 0 0;
+    font-size: 11px;
+    line-height: 1.3;
+  }
+  
+  .more-comments {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    font-size: 11px;
+  }
+  
