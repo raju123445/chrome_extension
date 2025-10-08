@@ -165,7 +165,7 @@ Input Comments: ${JSON.stringify(commentData, null, 2)}
   // Get API key
   let api;
   try {
-    api = "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";
+    api = "";
     console.log("API key loaded successfully");
   } catch (error) {
     console.error("Failed to load API key:", error);
