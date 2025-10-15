@@ -42,43 +42,6 @@ def translate_text(text, dest='en'):
         app.logger.error(f"Translation error: {e}")
         return text # Return original text on failure
 
-# @app.route("/predict", methods=["POST"])
-# def predict():
-#     try:
-#         app.logger.info("/predict called")
-#         data = request.get_json(silent=True) or {}
-#         app.logger.debug(f"Request JSON: {data}")
-#         text = data.get("text", "")
-
-#         if not text:
-#             return jsonify({"error": "No text provided"}), 400
-
-#         # Tokenize input
-#         inputs = tokenizer(text, return_tensors="pt")
-
-#         # Run model
-#         with torch.no_grad():
-#             outputs = model(**inputs)
-#             probs = torch.nn.functional.softmax(outputs.logits, dim=1)
-
-#         # Define labels (adjust if your model has different labels)
-#         labels = ["negative", "neutral", "positive"]
-
-#         # Create result dict
-#         result = {labels[i]: float(probs[0][i]) for i in range(len(labels))}
-
-#         response = {"input": text, "sentiment": result}
-#         app.logger.info(f"Prediction success: {response}")
-#         return jsonify(response)
-
-#     except Exception as e:
-#         app.logger.exception("Error during prediction")
-#         return jsonify({"error": str(e)}), 500
-
-
-# if __name__ == "__main__":
-#     app.run(host="0.0.0.0", port=5000, debug=True)
-
 
 # --- API Endpoint ---
 @app.route("/predict", methods=["POST"])

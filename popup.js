@@ -111,7 +111,7 @@ function displayCommentSummary(comments) {
   html += `
       </div>
       
-      <div class="action-buttons">
+      <div id="analyse" class="analyse-btn">
         <button id="analyse" class="analyse-btn">🔍 Analyse Comments</button>
       </div>
     </div>

@@ -2,151 +2,33 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Comment Viewer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <style>
-    body {
-      font-family: sans-serif;
-      padding: 10px;
-      max-width: 400px;
-      background: #f9f9f9;
-    }
-
-    .button-container {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-
-    button {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      cursor: pointer;
-      border-radius: 5px;
-      flex: 1;
-    }
-
-    button:disabled {
-      background: #ccc;
-      cursor: not-allowed;
-    }
-
-    .fetch-btn {
-      background: #28a745;
-    }
-
-    .analyse-btn {
-      background: #ffc107;
-      color: #333;
-    }
-
-    .comment, .comment-preview-item {
-      margin: 10px 0;
-      padding: 10px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    }
-
-    .comment-summary {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    }
-
-    .comment-preview-item {
-      border-left: 4px solid #007bff;
-    }
-
-    .comment-time {
-      color: #666;
-      font-size: 0.9em;
-      margin-left: 10px;
-    }
-
-    .comment-likes {
-      color: #28a745;
-      font-weight: bold;
-      margin-left: 10px;
-    }
-
-    .more-comments {
-      text-align: center;
-      color: #666;
-      font-style: italic;
-      margin: 10px 0;
-    }
-
-    .analysis-results {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    }
-
-    .sentiment-section {
-      margin: 15px 0;
-      padding: 10px;
-      border-radius: 5px;
-    }
-
-    .sentiment-section.positive {
-      background: #d4edda;
-      border-left: 4px solid #28a745;
-    }
-
-    .sentiment-section.negative {
-      background: #f8d7da;
-      border-left: 4px solid #dc3545;
-    }
-
-    .sentiment-section.neutral {
-      background: #e2e3e5;
-      border-left: 4px solid #6c757d;
-    }
-
-    .action-buttons {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    .loader {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #007bff;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      animation: spin 1s linear infinite;
-      margin: 20px auto;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    h3 {
-      margin-top: 20px;
-    }
-
-    @media (max-width: 500px) {
-      body {
-        font-size: 14px;
-      }
-
-      button {
-        width: 100%;
-      }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
   </style>
 </head>
 <body>
-  <h2>Scraped Comments</h2>
-  <button id="fetch">Fetch Comments</button>
-  <div id="comments"></div>
+  <div class="container">
+    <h2>Comment Viewer</h2>
+    <div class="button-container">
+      <button id="fetch" class="fetch-btn">
+        <i class="fas fa-download"></i>
+        Fetch Comments
+      </button>
+      <button id="analyse" class="analyse-btn">
+        <i class="fas fa-chart-line"></i>
+        Analyze
+      </button>
+    </div>
+    <div id="comments"></div>
+  </div>
   <script src="popup.js"></script>
 </body>
 </html>
