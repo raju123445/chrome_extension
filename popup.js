@@ -258,15 +258,119 @@ function displayAnalysisResults(results) {
         ${(results.neutral.comments || []).map((c) => `<p>${c}</p>`).join("")}
       </div>
       
-      <div class="action-buttons">
-        <button id="fetch" class="fetch-btn">🔄 Fetch New Comments</button>
+      <div class="button-container">
+        <button id="fetch" class="fetch-btn">🔄 Fetch New</button>
+        <button id="furtherAnalyze" class="analyse-btn">📊 Detailed Analysis</button>
       </div>
     </div>
   `;
   
-  // Re-attach event listener for the fetch button
+  // Re-attach event listeners
   document.getElementById("fetch").addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     fetchComments(tab.id);
+  });
+
+  document.getElementById("furtherAnalyze").addEventListener("click", () => {
+    performFurtherAnalysis(window.fetchedComments);
+  });
+}
+
+// Add new functions for further analysis
+function performFurtherAnalysis(comments) {
+  if (!comments || comments.length === 0) {
+    alert("No comments available for analysis!");
+    return;
+  }
+
+  // ----- 1. Comment Count -----
+  const totalComments = comments.length;
+
+  // ----- 2. Top Commenters -----
+  const userCount = {};
+  comments.forEach(c => {
+    const user = c.user || "Unknown";
+    userCount[user] = (userCount[user] || 0) + 1;
+  });
+
+  const topUsers = Object.entries(userCount)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5);
+
+  // ----- 3. Most Liked Comments -----
+  const mostLiked = [...comments]
+    .sort((a, b) => (parseInt(b.likes || 0) - parseInt(a.likes || 0)))
+    .slice(0, 5);
+
+  // ----- 4. Comment Length Analysis -----
+  const avgLength = comments.reduce((acc, c) => acc + c.comment.length, 0) / totalComments;
+
+  // ----- 5. Time-Based Activity -----
+  const timeActivity = {};
+  comments.forEach(c => {
+    const t = c.time || "unknown";
+    timeActivity[t] = (timeActivity[t] || 0) + 1;
+  });
+
+  renderAnalysisPage({
+    totalComments,
+    topUsers,
+    mostLiked,
+    avgLength: Math.round(avgLength),
+    timeActivity,
+  });
+}
+
+function renderAnalysisPage(data) {
+  const container = document.getElementById("comments");
+  
+  container.innerHTML = `
+    <div class="detailed-analysis">
+      <h2>📊 Detailed Analysis</h2>
+      
+      <div class="analysis-card">
+        <h3>📈 Overview</h3>
+        <p>Total Comments: ${data.totalComments}</p>
+        <p>Average Comment Length: ${data.avgLength} characters</p>
+      </div>
+
+      <div class="analysis-card">
+        <h3>👥 Top Commenters</h3>
+        <ul>
+          ${data.topUsers.map(([user, count]) => 
+            `<li>${user}: ${count} comments</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="analysis-card">
+        <h3>💖 Most Liked Comments</h3>
+        <ul>
+          ${data.mostLiked.map(c => 
+            `<li>${c.likes} likes: "${c.comment.substring(0, 50)}${c.comment.length > 50 ? '...' : ''}"</li>`
+          ).join('')}
+        </ul>
+      </div>
+
+      <div class="analysis-card">
+        <h3>⏰ Time Activity</h3>
+        <ul>
+          ${Object.entries(data.timeActivity)
+            .map(([time, count]) => `<li>${time}: ${count} comments</li>`)
+            .join('')}
+        </ul>
+      </div>
+
+      <button id="backToSentiment" class="fetch-btn">← Back to Sentiment Analysis</button>
+    </div>
+  `;
+
+  // Add back button functionality
+  document.getElementById("backToSentiment").addEventListener("click", () => {
+    displayAnalysisResults({
+      positive: { count: 0, comments: [] },
+      negative: { count: 0, comments: [] },
+      neutral: { count: 0, comments: [] },
+      ...window.lastAnalysisResults
+    });
   });
 }
