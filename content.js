@@ -6,9 +6,11 @@ function scrapeComments() {
     document.querySelectorAll("#content-text").forEach((el) => {
       const thread = el.closest("ytd-comment-thread-renderer");
       const user =
-        thread?.querySelector("#author-text span")?.innerText.trim() || "Unknown";
+        thread?.querySelector("#author-text span")?.innerText.trim() ||
+        "Unknown";
       const time =
-        thread?.querySelector("#published-time-text a")?.innerText.trim() || "N/A";
+        thread?.querySelector("#published-time-text a")?.innerText.trim() ||
+        "N/A";
       const comment = el.innerText.trim();
 
       const likeButton = thread?.querySelector("#vote-count-middle");
@@ -26,12 +28,12 @@ function scrapeComments() {
     });
 
     return comments.slice(0, 50);
-  } 
-  
-  else if (url.includes("x.com")) {
+  } else if (url.includes("x.com")) {
     document.querySelectorAll('[data-testid="tweetText"]').forEach((el) => {
       const article = el.closest("article");
-      const user = article?.querySelector('div[dir="ltr"] span')?.innerText.trim() || "Unknown";
+      const user =
+        article?.querySelector('div[dir="ltr"] span')?.innerText.trim() ||
+        "Unknown";
       const time = article?.querySelector("time")?.innerText.trim() || "N/A";
       const comment = el.innerText.trim();
 
@@ -39,51 +41,41 @@ function scrapeComments() {
     });
 
     return comments.slice(0, 50); // ✅ ADD THIS
-  } 
-  
-  else if (url.includes("instagram.com")) {
-    const commentBlocks = document.querySelectorAll('div.x1lliihq.x1plvlek');
+  } else if (url.includes("x.com")) {
+    // Select all tweet articles
+    const tweets = document.querySelectorAll('article[data-testid="tweet"]');
 
-    if (!commentBlocks.length) {
-      console.warn("No comment blocks found.");
-    }
-
-    commentBlocks.forEach((el) => {
+    tweets.forEach((tweet) => {
       try {
-        const userAnchor = el.querySelector('a[role="link"][href^="/"]');
-        const username = userAnchor?.innerText.trim() || "N/A";
-
-        const spanCandidates = el.querySelectorAll('span');
-        let comment = "N/A";
-        for (const span of spanCandidates) {
-          const text = span.innerText?.trim();
-          if (text && text !== username && !text.match(/^\d+\s+likes$/i)) {
-            comment = text;
-            break;
-          }
-        }
-
-        const timeEl = el.querySelector('time');
-        const time = timeEl?.getAttribute("title") || "N/A";
-
-        const likeSpan = [...el.querySelectorAll("span")].find(span =>
-          span.innerText.trim().match(/^\d+\s+likes$/)
+        // USERNAME
+        const userEl = tweet.querySelector(
+          "div.css-1jxf684.r-bcqeeo.r-1ttztb7.r-qvutc0.r-poiln3"
         );
-        const likes = likeSpan?.innerText.trim() || "0 likes";
+        const user = userEl?.innerText.trim() || "Unknown";
 
-        if (username !== "N/A" && comment !== "N/A") {
-          comments.push({ user: username, comment, time, likes });
+        // COMMENT (tweet text)
+        const commentEl = tweet.querySelector(
+          'div[data-testid="tweetText"], div.css-1jxf684.r-bcqeeo.r-1ttztb7.r-qvutc0.r-poiln3'
+        );
+        const comment = commentEl?.innerText.trim() || "N/A";
+
+        // TIME
+        const timeEl = tweet.querySelector("time");
+        const time = timeEl?.innerText.trim() || "N/A";
+
+        if (comment !== "N/A") {
+          comments.push({ user, time, comment });
         }
-      } catch (err) {
-        console.warn("Error parsing a comment:", err);
+      } catch (error) {
+        console.warn("Error parsing tweet:", error);
       }
     });
 
-    return comments.slice(0, 50); // ✅ ADD THIS
-  } 
-  
-  else if (url.includes("facebook.com")) {
-    const commentContainers = document.querySelectorAll('div[aria-label*="Comment by"]');
+    return comments.slice(0, 50);
+  } else if (url.includes("facebook.com")) {
+    const commentContainers = document.querySelectorAll(
+      'div[aria-label*="Comment by"]'
+    );
 
     commentContainers.forEach((container) => {
       try {

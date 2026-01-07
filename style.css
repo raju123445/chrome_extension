@@ -1092,3 +1092,15 @@ body {
     font-size: 13px;
   }
 }
+
+ canvas {
+    width: 100% !important;
+    height: 300px !important;
+    display: block;
+  }
+
+  #sentimentPieChart,
+  #sentimentTimelineChart {
+    width: 100% !important;
+    height: 300px !important;
+  }
