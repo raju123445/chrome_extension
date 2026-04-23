@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Social Media Comment Scraper",
+  "name": "Sentiment Analyzer chrome Extenssion",
   "version": "1.0",
   "description": "Scrape and view social media comments in popup",
 

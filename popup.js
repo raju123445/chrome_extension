@@ -149,7 +149,6 @@ function displayCommentSummary(comments) {
       </div>
       
       <div id="analyse" class="analyse-btn">
-        <button id="analyse" class="analyse-btn">🔍 Analyse Comments</button>
       </div>
     </div>
   `;
@@ -306,8 +305,7 @@ function displayAnalysisResults(results) {
       </div>
       
       <div class="button-container">
-        <button id="fetch" class="fetch-btn">🔄 Fetch New</button>
-        <button id="furtherAnalyze" class="analyse-btn">📊 Detailed Analysis</button>
+        <button id="furtherAnalyze" class="analyse-btn" style="margin-left: 5px">📊 Detailed Analysis</button>
       </div>
     </div>
   `;
@@ -434,7 +432,7 @@ function renderAnalysisPage(data) {
     <!-- NEW SECTION: WORD CLOUD -->
     <div class="analysis-card">
       <h3>🌥 Word Cloud</h3>
-      <canvas id="wordCloudCanvas" width="400" height="300"></canvas>
+      <canvas id="wordCloudCanvas" width="250" height="150"></canvas>
     </div>
 
     <!-- NEW SECTION: PIE CHART -->

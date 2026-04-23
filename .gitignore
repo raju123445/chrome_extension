@@ -9,7 +9,8 @@ config.js
 model/
 model - Copy/
 
-
+*.txt
+*.zip
 node_modules/
 npm-debug.log*
 yarn-debug.log*
